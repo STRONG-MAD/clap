@@ -1917,8 +1917,11 @@ impl<'help> Arg<'help> {
     /// ```
     /// [options]: Arg::takes_value()
     /// [positional arguments]: Arg::index()
-    pub fn possible_value(mut self, name: &'help str) -> Self {
-        self.possible_vals.push(name);
+    pub fn possible_value<T>(mut self, name: T) -> Self 
+    where
+    T: Into<&'help str>
+    {
+        self.possible_vals.push(name.into());
         self.takes_value(true)
     }
 
